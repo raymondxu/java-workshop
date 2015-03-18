@@ -1,13 +1,24 @@
 <a id="top"></a>
 # Intermediate Java
+
+This workshop is targeted towards people who have taken an introductory computer science course (e.g. 1004, 1006) and want to dive deeper into Java and become more comfortable with the language. I hope to elucidate concepts that may not have been crystal clear when you first learned them such as the distinction between primitives and objects, static and final, and abstraction. Then we will dive into a couple object-oriented design patterns that solve common software engineering problems using abstraction.
  
 ## Table of Contents
 1. [Variables](#variables)
   1. [Primitives](#primitives)
   2. [Objects](#objects)
-  3. [Wrappers](#wrappers)
-2. [Abstraction]
-3. [Patterns]
+  3. [Equality](#equality)
+  4. [Wrappers](#wrappers)
+  5. [Access Modifiers](#accessmodifiers)
+  6. [Static vs Final](#staticvsfinal)
+2. [Abstraction](#abstraction)
+  1. [Abstract Classes](#abstractclasses)
+  2. [Interfaces](#interfaces)
+3. [Patterns](#patterns)
+  1. [Iterator Pattern](#iterator)
+  2. [Factory Pattern](#factory)
+  3. [Singleton Pattern](#singleton)
+  4. [Composite Pattern](#composite)
  
 -------------------------
  
@@ -137,10 +148,12 @@ a's year is 2015
 b's year is 2015
 ```
 
+<a id="equality"></a>
+### 1.3 Equality
 
 
 <a id="wrappers"></a>
-### 1.3 Wrappers
+### 1.4 Wrappers
 
 Java provides built-in <b>primitive wrappers</b> for all 8 primitive types.
 
@@ -173,3 +186,60 @@ list.add(i);
 ```
 
 This is perfectly valid code even though the ArrayList only holds `Integer` objects and `i` is a primitive int.
+
+<a id="accessmodifiers"></a>
+### 1.5 Access Modifiers
+
+All instance variables have an access modifier. You may be familiar with `public` and `private`:
+
+```java
+public Car a;
+private Car b;
+```
+
+There are two more you may not have heard of: `protected` and `packaged`.
+
+```java
+protected Car c;
+Car d;
+```
+
+Note that the `packaged` modifier is represented by the absence of a modifier.
+
+<i>Also remember that the absense of a modifier in interfaces means `public` by virtue of the role of interfaces. Later in this talk we will discuss interfaces and abstraction at a deeper level.</i>
+
+This chart elegantly displays the distinctions between the four access modifiers. A checked box indicates that the variable can be accessed from that scope. For example, a `private` variable can only be accessed from within that class--other classes in the package, its subclasses, and other classes outside its package cannot access it.
+
+| Modifier | Class | Package | Subclass | World |
+|----------|:-----:|:-------:|:--------:|:-----:|
+| public | ✓ | ✓ | ✓ | ✓ |
+| protected | ✓ | ✓ | ✓ |  |
+| packaged | ✓ | ✓ |  |  |
+| private | ✓ |  |  |  |
+
+<a id="staticvsfinal"></a>
+### 1.6 Static vs Final
+
+<a id="abstraction"></a>
+## 2.0 Abstraction
+
+<a id="abstractclasses"></a>
+### 2.1 Abstract Classes
+
+<a id="interfaces"></a>
+### 2.2 Interfaces
+
+<a id="wrappers"></a>
+### 3.0 Patterns
+
+<a id="iterator"></a>
+### 3.1 Iterator Pattern
+
+<a id="factory"></a>
+### 3.2 Factory Pattern
+
+<a id="singleton"></a>
+### 3.3 Singleton Pattern
+
+<a id="composite"></a>
+### 3.4 Composite Pattern
