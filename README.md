@@ -229,8 +229,8 @@ This chart elegantly displays the distinctions between the four access modifiers
 <a id="interfaces"></a>
 ### 2.2 Interfaces
 
-<a id="wrappers"></a>
-### 3.0 Patterns
+<a id="patterns"></a>
+## 3.0 Patterns
 
 <a id="iterator"></a>
 ### 3.1 Iterator Pattern
