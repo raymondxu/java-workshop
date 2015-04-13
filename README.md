@@ -207,7 +207,7 @@ System.out.println(a == b);
 Gives us:
 
 ```
-True
+true
 ```
 
 A general rule of thumb is `equals()` for objects, and `==` for primitives.
@@ -279,6 +279,20 @@ This chart elegantly displays the distinctions between the four access modifiers
 
 <a id="staticvsfinal"></a>
 ### 1.6 Static vs Final
+
+`static` is used to describe fields and methods that are associated with a class, not instances of a class.
+
+For example, in our Car example above, each Car instance has it's own instance variables that describe its color or year. A `static` variable or method is accessed by using `Class.name` rather than `referenceName.name`.
+
+An example of a static method is `Math.max()` or `Math.abs()` and an example of a static variable is `Math.PI`. Notice how we never create an instance of the `Math` class and just use `Math.something`.
+
+`Math.PI` is also a `final` variable. `final` is a keyword used to describe things that are constant. It can describe fields, methods, and classes.
+
+A `final` field is a constant that does not change and its name is all capitalized by convention. A `final` variable can only be initialized once. If the variable holds a reference to an object cannot ever refer to another object. The contents of the object can change, but the variable will always "point" to that exact instance. For example, if we had a `private final ArrayList<Integer> list`, we could `add()` and `remove()` elements from the ArrayList, but we cannotn do `list = new ArrayList<Integer>()`.
+
+A `final` method cannot be overridden by a subclass.
+
+A `final` class cannot be extended (no subclasses allowed).
 
 <a id="abstraction"></a>
 ## 2.0 Abstraction
