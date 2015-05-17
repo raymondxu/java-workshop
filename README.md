@@ -34,10 +34,7 @@ In Java there are 8 primitives:
 
 <<<<<<< HEAD
 |  Primitive  |  Bytes  |
-=======
-| Primitive Type  |  Bytes  |
->>>>>>> origin/master
-|-----------------|---------|
+|-------------|---------|
 | byte | 1 |
 | boolean | 1 |
 | char | 2 |
@@ -225,16 +222,16 @@ Some things in Java such as generics require objects. For example, when we want 
 ArrayList<Integer> myList = new ArrayList<Integer>();
 ```
 
-But why do we have to use `Integer`? Why can't we use `int`?
+But why can't we use `int`? Why do we have to use `Integer`?
 
-Because `int` is not an object, and the generic `E` in the class ArrayList<E> must be an instance of a class.
+Because `int` is not an object, and the generic `E` in ArrayList<E> must be a class.
 
-`Integer` is an example of a wrapper class: a small class that wraps a primitive as an object.
+`Integer` is an example of a wrapper class: a class that wraps a primitive into an object.
 
 Java provides built-in <b>primitive wrappers</b> for all 8 primitive types.
 
 | Primitive  |  Wrapper class  |
-|------------|---------|
+|------------|-----------------|
 | byte | Byte |
 | boolean | Boolean |
 | char | Character |
@@ -244,17 +241,7 @@ Java provides built-in <b>primitive wrappers</b> for all 8 primitive types.
 | double | Double |
 | long | Long |
 
-Here we can see three different ways of integer creation:
-
-```java
-int a = 3;
-Integer b = new Integer(3);
-Integer c = new Integer("3");
-```
-
-This is perfectly valid code even though the ArrayList only holds `Integer` objects and `i` is a primitive int.
-
-Java also autoboxes for us. This means that we do not have to explicitly convert between wrapper objects and primitives. We can construct an ArrayList of Integer objects and then add them just like we add primitives.
+This seems a little complicated at first, but note that Java <b>autoboxes</b> for us. This means that we don't have to explicitly convert between wrapper objects and primitives. We can construct an ArrayList of Integer objects and then add the Integer objects just like we add primitives.
 
 ```java
 ArrayList<Integer> myList = new ArrayList<Integer>();
@@ -317,10 +304,7 @@ A `final` class cannot be extended (no subclasses allowed).
 <a id="abstraction"></a>
 ## 2.0 Abstraction
 
-
-Abstract classes and interfaces are ways to achieve abstraction. They are similar in many ways, so they can be quite difficult to learn well.
-
-Abstraction is a programming ideology that involves extracting physical implementation from method signatures.
+Abstraction is a programming ideology that involves extracting physical implementation from method signatures. Abstract classes and interfaces are ways to achieve abstraction. Abstract classes and interfaces are similar in many ways so they can be tough to understand at first. Let's try and clear that up.
 
 <a id="abstractclasses"></a>
 ### 2.1 Abstract Classes
@@ -342,23 +326,6 @@ Abstraction is a programming ideology that involves extracting physical implemen
 
 <a id="composite"></a>
 ### 3.4 Composite Pattern
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
