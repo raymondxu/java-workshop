@@ -308,16 +308,44 @@ Abstraction is a programming ideology that involves extracting physical implemen
 <a id="abstractclasses"></a>
 ### 2.1 Abstract Classes
 
-Abstract classes can contain instance variables, abstract methods, and concrete methods. If a class extends an abstract class, it must implement all abstract methods defined in its parent--unless it itself is an abstract class.
+Abstract classes can contain instance variables, abstract methods, and concrete methods. If a class extends an abstract class, it must implement all abstract methods defined in its parent--unless it itself is an abstract class. Abstract classes cannot be instantiated.
 
 <a id="interfaces"></a>
 ### 2.2 Interfaces
 
-Interfaces cannot have instance variables and cannot have implementations of methods. You can think of interfaces as templates for classes that share a common trait. When a class implements an interface, it must implement all of the methods declared in that interface.
+Interfaces cannot have instance variables and cannot have implementations of methods. You can think of interfaces as templates for classes that share a common trait. When a class implements an interface, it must implement all of the methods declared in that interface. Interfaces cannot be instantiated.
 
 For example, the `Comparable` interface only defines the method `compareTo(T o)`. The Oracle documentation describes its purpose: "Compares this object with the specified object for order. Returns a negative integer, zero, or a positive integer as this object is less than, equal to, or greater than the specified object." So if we have a class that implements the `Comparable` interface, it <b>must</b> provide an implementation for the `compareTo(T o)` method. In this sense, interfaces are also <b>contracts</b> between the high-level and the low-level details of the program.
 
-Let's say we have a `Speakable` interface with the method `speak()`. `Human`, `Dog`, and `Car` all implement `Speakable`. We can aggregate objects of these classes!
+Let's say we have a `Speakable` interface with the method `speak()`. `Human`, `Dog`, and `Car` all implement `Speakable`.
+
+```java
+public class Human implements Speakable
+{
+	public void speak()
+	{
+		System.out.println("Hello!");
+	}
+}
+
+public class Dog implements Speakable
+{
+	public void speak()
+	{
+		System.out.println("Bark!");
+	}
+}
+
+public class Train implements Speakable
+{
+	public void speak()
+	{
+		System.out.println("Choo choo!");
+	}
+}
+```
+
+We can now aggregate them!
 
 ```java
 ArrayList<Speakable> thingsThatCanSpeak = new ArrayList<Speakable>();
@@ -326,7 +354,7 @@ thingsThatCanSpeak.add(new Dog("Bob"));
 thingsThatCanSpeak.add(new Train("Carol"));
 ```
 
-And now:
+Watch this:
 
 ```java
 for (int i = 0; i < thingsThatCanSpeak.size(); i++)
@@ -335,7 +363,7 @@ for (int i = 0; i < thingsThatCanSpeak.size(); i++)
 }
 ```
 
-Will give us:
+Outputs:
 
 ```
 Hello!
