@@ -11,14 +11,14 @@ This workshop is targeted towards people who have taken an introductory computer
   4. [Wrappers](#wrappers)
   5. [Access Modifiers](#accessmodifiers)
   6. [Static vs Final](#staticvsfinal)
+  7. [Enums](#enums)
 2. [Abstraction](#abstraction)
   1. [Abstract Classes](#abstractclasses)
   2. [Interfaces](#interfaces)
 3. [Patterns](#patterns)
-  1. [Iterator Pattern](#iterator)
-  2. [Factory Pattern](#factory)
-  3. [Singleton Pattern](#singleton)
-  4. [Composite Pattern](#composite)
+  1. [Factory Pattern](#factory)
+  2. [Singleton Pattern](#singleton)
+  3. [Composite Pattern](#composite)
  
 -------------------------
  
@@ -299,6 +299,41 @@ A `final` field is a constant that does not change and its name is all capitaliz
 A `final` method cannot be overridden by a subclass.
 
 A `final` class cannot be extended (no subclasses allowed).
+
+<a id="enums"></a>
+### 1.7 Enums
+
+An enum type is a smart way to represent a set of constants that are known before-hand. For example, say we wanted to write a program that lets two people play chess. We could represent each chess piece as a class and then populate the game board with many objects. Or we could use enums since we know exactly what types of pieces there are in the game.
+
+```java
+enum chessPieceType
+{
+	PAWN(1),
+	ROOK(5),
+	KNIGHT(3),
+	BISHOP(3),
+	QUEEN(9),
+	KING(200)
+	
+	private final int value;
+	
+	public chessPieceType(int value)
+	{
+		this.value = value;
+	}
+	
+	private double mass()
+	{
+		return value;
+	}
+}
+
+enum chessPieceColor
+{
+	WHITE,
+	BLACK
+}
+```
 
 <a id="abstraction"></a>
 ## 2.0 Abstraction
