@@ -303,37 +303,71 @@ A `final` class cannot be extended (no subclasses allowed).
 <a id="enums"></a>
 ### 1.7 Enums
 
-An enum type is a smart way to represent a set of constants that are known before-hand. For example, say we wanted to write a program that lets two people play chess. We could represent each chess piece as a class and then populate the game board with many objects. Or we could use enums since we know exactly what types of pieces there are in the game.
+An enum type is a smart way to represent a set of constants that are known beforehand. For example, say we wanted to represent different denominations of change like pennies, nickels, dimes, and quarters. There are a lot of approaches to this design problem. One way is to simply define a `Coin` class with a field for value.
 
 ```java
-enum chessPieceType
+public class Coin
 {
-	PAWN(1),
-	ROOK(5),
-	KNIGHT(3),
-	BISHOP(3),
-	QUEEN(9),
-	KING(200)
+	int value;
 	
-	private final int value;
+	public Coin(int value)
+	{
+		this.value = vaue;
+	}
+}
+```
+
+This is pretty bad. How can we do better?
+
+We can define the denominations using static final ints:
+
+```java
+public class CoinDenomination
+{
+	public static final int PENNY = 1;
+	public static final int NICKEL = 5;
+	public static final int DIME = 10;
+	public static final int QUARTER = 25;
+}
+```
+
+Now we can create coins like this:
+
+```java
+Coin c = new Coin(CoinDenomination.QUARTER);
+```
+
+Cool! But how can we do better?
+
+Enums!
+
+```java
+public enum Coin { PENNY, NICKEL, DIME, QUARTER };
+```
+
+In Java, this syntax automatically creates the static final constants PENNY, NICKEL, DIME, and QUARTER. Let's associate values with them!
+
+```java
+public enum Coin
+{
+	PENNY(1), NICKEL(5), DIME(10), QUARTER(25)
 	
-	public chessPieceType(int value)
+	private int value;
+	
+	private Coin(int value)
 	{
 		this.value = value;
 	}
-	
-	private double mass()
-	{
-		return value;
-	}
-}
-
-enum chessPieceColor
-{
-	WHITE,
-	BLACK
-}
+};
 ```
+
+Now we can create coins like this:
+
+```java
+Coin c = Coin.QUARTER;
+```
+
+Note that since enum constants are `final`, we compare them using `==`.
 
 <a id="abstraction"></a>
 ## 2.0 Abstraction
