@@ -303,7 +303,7 @@ A `final` class cannot be extended (no subclasses allowed).
 <a id="enums"></a>
 ### 1.7 Enums
 
-An enum type is a smart way to represent a set of constants that are known beforehand. For example, say we wanted to represent different denominations of change like pennies, nickels, dimes, and quarters. There are a lot of approaches to this design problem. One way is to simply define a `Coin` class with a field for value.
+Say we want to represent different coins like pennies, nickels, dimes, and quarters. There are a lot of approaches to this design dilemma. One way is to simply define a `Coin` class with a field to store the value.
 
 ```java
 public class Coin
@@ -317,7 +317,9 @@ public class Coin
 }
 ```
 
-This is pretty bad. How can we do better?
+This is pretty bad. Why?
+
+How can we do better?
 
 We can define the denominations using static final ints:
 
@@ -367,7 +369,11 @@ Now we can create coins like this:
 Coin c = Coin.QUARTER;
 ```
 
-Note that since enum constants are `final`, we compare them using `==`.
+Enums are essentially mini-classes that represent a set of constants. They can optionally have fields and methods. Some other basic examples of enum use cases are to represent the days of the week, planets in our solar system, and chess pieces.
+
+Notes:
+The constructor must be `private` to preserve type-safety.
+Since enum constants are `final`, we compare them using `==`.
 
 <a id="abstraction"></a>
 ## 2.0 Abstraction
