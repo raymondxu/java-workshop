@@ -1,7 +1,7 @@
 <a id="top"></a>
 # Intermediate Java
 
-This workshop is targeted towards people who have taken an introductory computer science course (e.g. 1004, 1006) and want to dive deeper into Java and become more comfortable with the language. I hope to elucidate concepts that may not have been crystal clear when you first learned them such as primitives and objects, static and final, and abstraction. Then we will dive into a couple object-oriented design patterns that solve common software engineering problems using abstraction.
+This workshop is targeted towards people who have taken an introductory computer science course (e.g. 1004, 1006) or want a refresher in Java and software engineering fundamentals. I hope to elucidate concepts that may not have been crystal clear when you first learned them such as primitives and objects, static and final, and abstraction. Then we will dive into a few common object-oriented design patterns and explore why abstraction is so cool.
 
 ## Table of Contents
 1. [Variables](#variables)
@@ -56,7 +56,7 @@ double g = 3.14159265358979;
 long h = 12345678901234567890;
 ```
 
-Primitives values have independent states. Changing the value of one does not influence another.
+Primitives have independent states. Changing the value of one does not influence another.
 
 ```java
 int a = 5;
@@ -159,7 +159,7 @@ Car b = new Car(1996);
 System.out.println(a == b);
 ```
 
-This is <b>wrong</b>. The `==` operator in java tells you if two references are equal. It does not tell you if the objects have the same instance variable values or any other comparison metric. So for most purposes, when comparing object equality, we use the `equals()` method. Let's looks at the documentation from the Java API:
+This is <b>wrong</b>. The `==` operator in Java tells you if two references are equal. It does not tell you if the objects have the same instance variable values or any other comparison metric. So for most purposes, when comparing object equality, we use the `equals()` method. Let's looks at the documentation from the Java API:
 
 > public boolean equals(Object obj)
 > 
@@ -196,7 +196,7 @@ This is a simple example, but note that if our Car class had other instance vari
 
 But wait! Why do we use `==` when we compare years?
 
-Remember that `year` is an `int` which is a primitive. So this means we can't even invoke a method on a year, so using `equals()` is out of the question. For primitives, `==` compares values.
+Remember that `year` is an `int` which is a primitive. So this means we can't even invoke a method on a `year`, so using `equals()` is out of the question. For primitives, `==` compares values.
 
 ```java
 int a = 5;
@@ -223,7 +223,7 @@ ArrayList<Integer> myList = new ArrayList<Integer>();
 
 But why can't we use `int`? Why do we have to use `Integer`?
 
-Because `int` is not an object, and the generic `E` in ArrayList<E> must be a class.
+Because `int` is not an object, and the generic `E` in `ArrayList<E>` must be a class.
 
 `Integer` is an example of a wrapper class: a class that wraps a primitive into an object.
 
@@ -459,7 +459,7 @@ The strategy pattern enables easy interchangability of parts. We define a groupi
 ```java
 public interface RandomNumberGenerator
 {
-	public int roll();
+	int roll();
 }
 
 public class Die implements RandomNumberGenerator
@@ -524,7 +524,7 @@ The composite pattern allows for flexible aggregation of objects.
 ```java
 public interface Packagable
 {
-	public int getWeight();
+	int getWeight();
 }
 
 public class Item implements Packagable
