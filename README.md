@@ -16,7 +16,7 @@ This workshop is targeted towards people who have taken an introductory computer
   1. [Abstract Classes](#abstractclasses)
   2. [Interfaces](#interfaces)
 3. [Patterns](#patterns)
-  1. [Factory Pattern](#factory)
+  1. [Strategy Pattern](#strategy)
   2. [Singleton Pattern](#singleton)
   3. [Composite Pattern](#composite)
  
@@ -159,7 +159,7 @@ Car b = new Car(1996);
 System.out.println(a == b);
 ```
 
-This is <b>wrong</b>. The `==` operator in java tells you if two references are equal. It does not tell you if the objects have the same instance variable values or any other comparison metric. So for most purpses, when comparing object equality, we use the `equals()` method. Let's looks at the documentation from the Java API:
+This is <b>wrong</b>. The `==` operator in java tells you if two references are equal. It does not tell you if the objects have the same instance variable values or any other comparison metric. So for most purposes, when comparing object equality, we use the `equals()` method. Let's looks at the documentation from the Java API:
 
 > public boolean equals(Object obj)
 > 
@@ -196,7 +196,7 @@ This is a simple example, but note that if our Car class had other instance vari
 
 But wait! Why do we use `==` when we compare years?
 
-Remember that `year` is an `int` which is a primitive. So this means we can't even invoke a method on a year, so equals() is out of the question. For primitives, `==` compares values.
+Remember that `year` is an `int` which is a primitive. So this means we can't even invoke a method on a year, so using `equals()` is out of the question. For primitives, `==` compares values.
 
 ```java
 int a = 5;
@@ -215,7 +215,7 @@ A general rule of thumb is `equals()` for objects, and `==` for primitives.
 <a id="wrappers"></a>
 ### 1.4 Wrappers
 
-Some things in Java such as generics require objects. For example, when we want to create an ArrayList, we have to specify what type of object will be stored in the ArrayList
+Sometimes we need objects. For example, when we want to create an ArrayList, we have to specify what type of object will be stored in the ArrayList.
 
 ```java
 ArrayList<Integer> myList = new ArrayList<Integer>();
@@ -272,7 +272,7 @@ Car d;
 
 Note that the `packaged` modifier is represented by the absence of a modifier.
 
-<i>Also remember that the absense of a modifier in interfaces means `public` by virtue of the role of interfaces. Later in this talk we will discuss interfaces and abstraction at a deeper level.</i>
+<i>Note that that the absence of a modifier in interfaces means `public` by virtue of the role of interfaces. Later in this talk we will discuss interfaces and abstraction at a deeper level.</i>
 
 This chart elegantly displays the distinctions between the four access modifiers. A checked box indicates that the variable can be accessed from that scope. For example, a `private` variable can only be accessed from within that class--other classes in the package, its subclasses, and other classes outside its package cannot access it.
 
@@ -288,13 +288,13 @@ This chart elegantly displays the distinctions between the four access modifiers
 
 `static` is used to describe fields and methods that are associated with a class, not instances of a class.
 
-For example, in our Car example above, each Car instance has it's own instance variables that describe its color or year. A `static` variable or method is accessed by using `Class.name` rather than `referenceName.name`.
+For example, in our Car example above, each Car instance has it's own instance variables that describe its color or year. These fields are not `static`.
 
-An example of a static method is `Math.max()` or `Math.abs()` and an example of a static variable is `Math.PI`. Notice how we never create an instance of the `Math` class and just use `Math.something`.
+An example of a static method is `Math.max()` or `Math.abs()` and an example of a static variable is `Math.PI`. Notice how we never create an instance of the `Math` class?
 
 `Math.PI` is also a `final` variable. `final` is a keyword used to describe things that are constant. It can describe fields, methods, and classes.
 
-A `final` field is a constant that does not change and its name is all capitalized by convention. A `final` variable can only be initialized once. If the variable holds a reference to an object cannot ever refer to another object. The contents of the object can change, but the variable will always "point" to that exact instance. For example, if we had a `private final ArrayList<Integer> list`, we could `add()` and `remove()` elements from the ArrayList, but we cannotn do `list = new ArrayList<Integer>()`.
+A `final` field is a constant that does not change. A `final` variable can only be initialized once. If the variable holds a reference to an object it cannot ever refer to another object. The contents of the object can change, but the variable will always "point" to that exact instance. For example, if we had a `final ArrayList<Integer> list`, we could `add()` and `remove()` elements from the ArrayList, but we can't do `list = new ArrayList<Integer>()`.
 
 A `final` method cannot be overridden by a subclass.
 
@@ -372,7 +372,7 @@ Coin c = Coin.QUARTER;
 Enums are essentially mini-classes that represent a set of constants. They can optionally have fields and methods. Some other basic examples of enum use cases are to represent the days of the week, planets in our solar system, and chess pieces.
 
 Notes:
-The constructor must be `private` to preserve type-safety.
+The enum constructor must be `private` to preserve type-safety.
 Since enum constants are `final`, we compare them using `==`.
 
 <a id="abstraction"></a>
@@ -451,30 +451,115 @@ Note that a class can implement multiple interfaces but only extend one class.
 <a id="patterns"></a>
 ## 3.0 Patterns
 
-<a id="iterator"></a>
-### 3.1 Iterator Pattern
+<a id="strategy"></a>
+### 3.1 Strategy Pattern
 
-<a id="factory"></a>
-### 3.2 Factory Pattern
+The strategy pattern enables easy interchangability of parts. We define a grouping of parts (interface) and then encapsulate each specific part (classes that implement the interface). This way, when a part is needed, any one of the parts can be used and the program will run smoothly.
+
+```java
+public interface RandomNumberGenerator
+{
+	public int roll();
+}
+
+public class Die implements RandomNumberGenerator
+{
+	public int roll()
+	{
+		return (int)(Math.random() * 6) + 1;
+	}
+}
+
+public class RiggedDie implements RandomNumberGenerator
+{
+	public int roll()
+	{
+		return 4;
+	}
+}
+
+public class Casino
+{
+	private RandomNumberGenerator x;
+	
+	public Casino(RandomNumberGenerator x)
+	{
+		this.x = x;
+	}
+	
+	public void play()
+	{
+		// ...
+		int outcome = x.roll();
+		// ...
+	}
+}
+```
 
 <a id="singleton"></a>
-### 3.3 Singleton Pattern
+### 3.2 Singleton Pattern
+
+The singleton pattern only allows there to be one instance of a class. There are a few ways to achieve this but here is a simple way:
+
+```java
+public class Dictator
+{
+	private static final Dictator INSTANCE = new Dictator();
+	private Dictator() {}
+	
+	public static Dictator getInstance()
+	{
+		return INSTANCE;
+	}
+}
+```
+
+As you can see, the concepts `static`, `final`, and `private` that we learned earlier all play a role in this pattern.
 
 <a id="composite"></a>
-### 3.4 Composite Pattern
+### 3.3 Composite Pattern
 
+The composite pattern allows for flexible aggregation of objects.
 
+```java
+public interface Packagable
+{
+	public int getWeight();
+}
 
+public class Item implements Packagable
+{
+	private int weight;
 
+	public Item(int weight)
+	{
+		this.weight = weight;
+	}
 
+	public int getWeight()
+	{
+		return weight;
+	}
+}
 
+public class Box implements Packagable
+{
+	private ArrayList<Packagable> contents = new ArrayList<Packagable>();
+	
+	public int getWeight()
+	{
+		int sum = 0;
+		for (Packagable p : contents)
+		{
+			sum += p.getWeight();
+		}
+		return sum;
+	}
+}
+```
 
+Why is this cool?
 
-
-
-
-
-
-
+Not only can we can put items into boxes, but we can also put boxes into boxes! And we can query the weight of any of the Packagable items because they all have a `getWeight()` method!
 
 
