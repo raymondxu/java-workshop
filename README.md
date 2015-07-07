@@ -212,6 +212,8 @@ true
 
 A general rule of thumb is `equals()` for objects, and `==` for primitives.
 
+<b>Two objects that are equal must return the same hash code.</b> This is a contract between `equals()` and `hashCode()`. `equals()` and `hashCode()` are both methods in `Object`, which every class implicitly inherits from. By default, `hashCode()` returns the memory location of an object, and `equals()` compares if the `hashCode()` of two objects is the same. When we overwrite either of these two methods, we have to make sure that the contract is still upheld. 
+
 <a id="wrappers"></a>
 ### 1.4 Wrappers
 
