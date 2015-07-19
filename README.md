@@ -117,7 +117,7 @@ Why?
 
 The answer lies in <b>references</b>.
 
-When we instantiate an object, we create a reference to that object in memory. A reference can be thought of as an arrow pointing to location of the object.
+When we instantiate an object, we create a reference to that object in memory. A value of a reference is the location of the object.
 
 ```java
 Car a = new Car();
@@ -314,7 +314,7 @@ public class Coin
 	
 	public Coin(int value)
 	{
-		this.value = vaue;
+		this.value = value;
 	}
 }
 ```
@@ -394,7 +394,16 @@ Interfaces cannot have instance variables and cannot have implementations of met
 
 For example, the `Comparable` interface only defines the method `compareTo(T o)`. The Oracle documentation describes its purpose: "Compares this object with the specified object for order. Returns a negative integer, zero, or a positive integer as this object is less than, equal to, or greater than the specified object." So if we have a class that implements the `Comparable` interface, it <b>must</b> provide an implementation for the `compareTo(T o)` method. In this sense, interfaces are also <b>contracts</b> between the high-level and the low-level details of the program.
 
-Let's say we have a `Speakable` interface with the method `speak()`. `Human`, `Dog`, and `Car` all implement `Speakable`.
+Let's say we have a `Speakable` interface with the method `speak()`.
+
+```java
+public interface Speakable()
+{
+	void speak();
+}
+```
+
+Now we can let `Human`, `Dog`, and `Car` all implement `Speakable`.
 
 ```java
 public class Human implements Speakable
@@ -524,12 +533,12 @@ As you can see, the concepts `static`, `final`, and `private` that we learned ea
 The composite pattern allows for flexible aggregation of objects.
 
 ```java
-public interface Packagable
+public interface Packageable
 {
 	int getWeight();
 }
 
-public class Item implements Packagable
+public class Item implements Packageable
 {
 	private int weight;
 
@@ -544,14 +553,14 @@ public class Item implements Packagable
 	}
 }
 
-public class Box implements Packagable
+public class Box implements Packageable
 {
-	private ArrayList<Packagable> contents = new ArrayList<Packagable>();
+	private ArrayList<Packageable> contents = new ArrayList<Packageable>();
 	
 	public int getWeight()
 	{
 		int sum = 0;
-		for (Packagable p : contents)
+		for (Packageable p : contents)
 		{
 			sum += p.getWeight();
 		}
@@ -562,6 +571,6 @@ public class Box implements Packagable
 
 Why is this cool?
 
-Not only can we can put items into boxes, but we can also put boxes into boxes! And we can query the weight of any of the Packagable items because they all have a `getWeight()` method!
+Not only can we can put items into boxes, but we can also put boxes into boxes! And we can query the weight of any of the Packageable items because they all have a `getWeight()` method!
 
 
