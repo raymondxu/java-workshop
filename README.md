@@ -530,7 +530,7 @@ As you can see, the concepts `static`, `final`, and `private` that we learned ea
 <a id="composite"></a>
 ### 3.3 Composite Pattern
 
-The composite pattern allows for flexible aggregation of objects.
+The composite pattern allows for flexible aggregation of different objects that share a common trait. This common trait is embodied by an interface.
 
 ```java
 public interface Packageable
