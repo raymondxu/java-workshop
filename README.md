@@ -290,7 +290,7 @@ This chart elegantly displays the distinctions between the four access modifiers
 
 `static` is used to describe fields and methods that are associated with a class, not instances of a class.
 
-For example, in our Car example above, each Car instance has it's own instance variables that describe its color or year. These fields are not `static`.
+For example, in our Car example above, each Car instance has its own instance variables that describe its color or year. These fields are not `static`.
 
 An example of a static method is `Math.max()` or `Math.abs()` and an example of a static variable is `Math.PI`. Notice how we never create an instance of the `Math` class?
 
