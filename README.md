@@ -290,7 +290,7 @@ This chart elegantly displays the distinctions between the four access modifiers
 
 `static` is used to describe fields and methods that are associated with a class, not instances of a class.
 
-For example, in our Car example above, each Car instance has it's own instance variables that describe its color or year. These fields are not `static`.
+For example, in our Car example above, each Car instance has its own instance variables that describe its color or year. These fields are not `static`.
 
 An example of a static method is `Math.max()` or `Math.abs()` and an example of a static variable is `Math.PI`. Notice how we never create an instance of the `Math` class?
 
@@ -387,10 +387,56 @@ Abstraction is a programming ideology that involves extracting physical implemen
 
 Abstract classes can contain instance variables, abstract methods, and concrete methods. If a class extends an abstract class, it must implement all abstract methods defined in its parent--unless it itself is an abstract class. Abstract classes cannot be instantiated.
 
+Semantically, abstract classes define a close relation between the abstract class and its subclasses. For example, you could define an abstract class called `GeometricShape`.
+
+```java
+abstract class GeometricShape
+{
+	Color col;
+	
+	// [Constructors]
+	
+	Color getColor()
+	{
+		return col;
+	}
+	
+	abstract double calculateArea();
+}
+```
+
+Just like you can't really draw just a generic geometric shape, you can't instantiate a `GeometricShape` object because the class is abstract. Let's define some subclasses:
+
+```java
+class Square extends GeometricShape
+{
+	double edgeLength;
+	
+	// [Constructors]
+	
+	double calculateArea()
+	{
+		return edgeLength * edgeLength;
+	}
+}
+
+class Circle extends GeometricShape
+{
+	double radius;
+
+	// [Constructors]
+	
+	double calculateArea()
+	{
+		return Math.PI * Math.pow(radius, 2);
+	}
+}
+```
+
 <a id="interfaces"></a>
 ### 2.2 Interfaces
 
-Interfaces cannot have instance variables and cannot have implementations of methods. You can think of interfaces as templates for classes that share a common trait. When a class implements an interface, it must implement all of the methods declared in that interface. Interfaces cannot be instantiated.
+Interfaces cannot have instance variables and cannot have implementations of methods. You can think of interfaces as templates for classes that share a common trait. When a class implements an interface, it must implement all of the methods declared in that interface. Like abstract classes, interfaces cannot be instantiated.
 
 For example, the `Comparable` interface only defines the method `compareTo(T o)`. The Oracle documentation describes its purpose: "Compares this object with the specified object for order. Returns a negative integer, zero, or a positive integer as this object is less than, equal to, or greater than the specified object." So if we have a class that implements the `Comparable` interface, it <b>must</b> provide an implementation for the `compareTo(T o)` method. In this sense, interfaces are also <b>contracts</b> between the high-level and the low-level details of the program.
 
@@ -457,7 +503,7 @@ Bark!
 Choo choo!
 ```
 
-Note that a class can implement multiple interfaces but only extend one class.
+Note that a class can implement multiple interfaces but only extend one class. Additionally, all methods in an interface are public, and all fields in an interface are public, static, and final. And unlike the fact that abstract classes should be related to their subclasses, interfaces are used when the implementing classes are unrelated to each other.
 
 <a id="patterns"></a>
 ## 3.0 Patterns
