@@ -527,6 +527,30 @@ public class Dictator
 
 As you can see, the concepts `static`, `final`, and `private` that we learned earlier all play a role in this pattern.
 
+Another interesting implemention of the singleton pattern is based off of the initialization-on-demand holder idiom. This implementation takes advantage of the way the JVM initializes classes. Let's look at a simple example:
+
+```java
+public class Dictator
+{
+	private Dictator() {}
+
+	private static class LazyHolder
+	{
+		private static final Dictator INSTANCE = new Dictator();
+	}
+
+	public static Dictator getInstance()
+	{
+		return LazyHolder.INSTANCE;
+	}
+}
+```
+
+Because `LazyHolder` is a static inner class of `Dictator`, it is not initialized in the initialization phase of the JVM. It is only when the static `getInstance()` method is first invoked that Java realizes that it needs to initialize `LazyHolder` and does so.
+
+This pattern results in a thread-safe singleton instance because Java initialization is guaranteed to be serial. That is, no synchronization overhead needs to be added to this class to preserve the singleton property. Additionally, lazy loading adds a bit of efficiency to the overall program since we only initialize `LazyHolder` when it is immediately needed.
+
+
 <a id="composite"></a>
 ### 3.3 Composite Pattern
 
