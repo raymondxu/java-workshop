@@ -220,7 +220,7 @@ A general rule of thumb is `equals()` for objects, and `==` for primitives.
 Sometimes we need objects. For example, when we want to create an ArrayList, we have to specify what type of object will be stored in the ArrayList.
 
 ```java
-ArrayList<Integer> myList = new ArrayList<Integer>();
+List<Integer> myList = new ArrayList<Integer>();
 ```
 
 But why can't we use `int`? Why do we have to use `Integer`?
@@ -393,9 +393,7 @@ Semantically, abstract classes define a close relation between the abstract clas
 abstract class GeometricShape
 {
 	Color col;
-	
-	// [Constructors]
-	
+
 	Color getColor()
 	{
 		return col;
@@ -411,9 +409,7 @@ Just like you can't really draw just a generic geometric shape, you can't instan
 class Square extends GeometricShape
 {
 	double edgeLength;
-	
-	// [Constructors]
-	
+
 	double calculateArea()
 	{
 		return edgeLength * edgeLength;
@@ -423,8 +419,6 @@ class Square extends GeometricShape
 class Circle extends GeometricShape
 {
 	double radius;
-
-	// [Constructors]
 	
 	double calculateArea()
 	{
@@ -480,16 +474,16 @@ public class Train implements Speakable
 We can now aggregate them!
 
 ```java
-ArrayList<Speakable> thingsThatCanSpeak = new ArrayList<Speakable>();
-thingsThatCanSpeak.add(new Human("Alice"));
-thingsThatCanSpeak.add(new Dog("Bob"));
-thingsThatCanSpeak.add(new Train("Carol"));
+List<Speakable> thingsThatCanSpeak = new ArrayList<Speakable>();
+thingsThatCanSpeak.add(new Human());
+thingsThatCanSpeak.add(new Dog());
+thingsThatCanSpeak.add(new Train());
 ```
 
 Watch this:
 
 ```java
-for (int i = 0; i < thingsThatCanSpeak.size(); i++)
+for (Speakable speaker : thingsThatCanSpeak)
 {
 	thingsThatCanSpeak.get(i).speak();
 }
@@ -503,7 +497,9 @@ Bark!
 Choo choo!
 ```
 
-Note that a class can implement multiple interfaces but only extend one class. Additionally, all methods in an interface are public, and all fields in an interface are public, static, and final. And unlike the fact that abstract classes should be related to their subclasses, interfaces are used when the implementing classes are unrelated to each other.
+<i>We can use the Java "foreach loop" or "enhanced for loop" here because `ArrayList` is an implementation of the `List` interface which implements `Iterable`.</i>
+
+A class can implement multiple interfaces but only extend one class. Additionally, all methods in an interface are public, and all fields in an interface are public, static, and final. And unlike the fact that abstract classes should be closely related to their subclasses, interfaces are used when the implementing classes are unrelated to each other.
 
 <a id="patterns"></a>
 ## 3.0 Patterns
@@ -625,7 +621,7 @@ public class Item implements Packageable
 
 public class Box implements Packageable
 {
-	private ArrayList<Packageable> contents = new ArrayList<Packageable>();
+	private List<Packageable> contents = new ArrayList<Packageable>();
 	
 	public int getWeight()
 	{
