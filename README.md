@@ -5,20 +5,20 @@ This workshop is targeted towards people who have taken an introductory computer
 
 ## Table of Contents
 1. [Variables](#variables)
-  1. [Primitives](#primitives)
-  2. [Objects](#objects)
-  3. [Equality](#equality)
-  4. [Wrappers](#wrappers)
-  5. [Access Modifiers](#accessmodifiers)
-  6. [Static vs Final](#staticvsfinal)
-  7. [Enums](#enums)
+	1. [Primitives](#primitives)
+	2. [Objects](#objects)
+	3. [Equality](#equality)
+	4. [Wrappers](#wrappers)
+	5. [Access Modifiers](#accessmodifiers)
+	6. [Static vs Final](#staticvsfinal)
+	7. [Enums](#enums)
 2. [Abstraction](#abstraction)
-  1. [Abstract Classes](#abstractclasses)
-  2. [Interfaces](#interfaces)
+	1. [Abstract Classes](#abstractclasses)
+	2. [Interfaces](#interfaces)
 3. [Patterns](#patterns)
-  1. [Strategy Pattern](#strategy)
-  2. [Singleton Pattern](#singleton)
-  3. [Composite Pattern](#composite)
+	1. [Strategy Pattern](#strategy)
+	2. [Singleton Pattern](#singleton)
+	3. [Composite Pattern](#composite)
  
 -------------------------
  
